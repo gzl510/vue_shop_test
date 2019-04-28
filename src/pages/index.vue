@@ -18,12 +18,13 @@
         <h2>最新消息</h2>
         <ul>
           <li v-for="item in newsList">
-            <a :href="item.url">{{item.title}}</a>
+            <a :href="item.url" class="new-item">{{item.title}}</a>
           </li>
         </ul>
       </div>
     </div>
     <div class="index-right">
+      <slide-show :slides="slides" :inv=inv @onChange="doSomeingChange()"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item"
             v-for="(item, index) in boardList"
@@ -42,9 +43,36 @@
 </template>
 
 <script>
+import slideShow from '@/components/slideShow'
 export default {
+  components: {
+    slideShow
+  },
   data() {
     return {
+      inv: 2000,
+      slides: [
+        {
+          src: require('../assets/slideShow/pic1.jpg'),
+          title: 'xxx1',
+          href: 'detail/analysis'
+        },
+        {
+          src: require('../assets/slideShow/pic2.jpg'),
+          title: 'xxx2',
+          href: 'detail/count'
+        },
+        {
+          src: require('../assets/slideShow/pic3.jpg'),
+          title: 'xxx3',
+          href: 'http://xxx.xxx.com'
+        },
+        {
+          src: require('../assets/slideShow/pic4.jpg'),
+          title: 'xxx4',
+          href: 'detail/forecast'
+        }
+      ],
        boardList: [
         {
           title: '开放产品',
@@ -127,11 +155,16 @@ export default {
   },
   created () {
     this.$http.get('api/getNewsList')
-    .then(function (res) {
+    .then((res) => {
       this.newsList = [].concat(res.data)
-    }, function (err) {
+    }, (err) => {
       console.log(err)
     })
+  },
+  methods: {
+    doSomeingChange () {
+      console.log("doSomeingChange")
+    }
   }
 };
 </script>
@@ -222,6 +255,13 @@ export default {
 .hot-tag {
   background: red;
   color: #fff;
+}
+.new-item {
+  display: inline-block;
+  width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .new-item {
   display: inline-block;
