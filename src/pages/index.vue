@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv=inv @onChange="doSomeingChange()"></slide-show>
+      <slide-show :slides="slides" :inv=inv @onChange="doSomeingChange"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item"
             v-for="(item, index) in boardList"
@@ -162,8 +162,8 @@ export default {
     })
   },
   methods: {
-    doSomeingChange () {
-      console.log("doSomeingChange")
+    doSomeingChange (index) {
+      console.log(index)
     }
   }
 };

@@ -3,10 +3,10 @@
     <div class="slide-img">
       <a :href="slides[nowIndex].href">
         <transition name="slide-trans">
-          <img v-show="isShow" :src="slides[nowIndex].src" alt="">
+          <img v-show="isShow" :src="slides[nowIndex].src" alt>
         </transition>
-         <transition name="slide-trans-old">
-          <img v-show="!isShow" :src="slides[nowIndex].src" alt="">
+        <transition name="slide-trans-old">
+          <img v-show="!isShow" :src="slides[nowIndex].src" alt>
         </transition>
       </a>
     </div>
@@ -32,60 +32,60 @@ export default {
       default: 1000
     }
   },
-  data () {
+  data() {
     return {
       nowIndex: 0,
       isShow: true
-    }
+    };
   },
   computed: {
-    prevIndex () {
+    prevIndex() {
       if (this.nowIndex === 0) {
-        return this.slides.length-1
+        return this.slides.length - 1;
       } else {
-        return this.nowIndex - 1
+        return this.nowIndex - 1;
       }
     },
-    nextIndex () {
-       if (this.nowIndex === this.slides.length-1) {
-        return 0
+    nextIndex() {
+      if (this.nowIndex === this.slides.length - 1) {
+        return 0;
       } else {
-        return this.nowIndex + 1
+        return this.nowIndex + 1;
       }
     }
   },
   methods: {
-    goToPage (index) {
-      this.isShow = false
+    goToPage(index) {
+      this.isShow = false;
       setTimeout(() => {
-        this.isShow = true
-        this.nowIndex = index
-        this.$emit('onChange', index)
-      }, 10)
+        this.isShow = true;
+        this.nowIndex = index;
+        this.$emit("onChange", index);
+      }, 10);
     },
-    runInv () {
+    runInv() {
       this.invOver = setInterval(() => {
-        this.goToPage(this.nextIndex)
-      }, this.inv)
+        this.goToPage(this.nextIndex);
+      }, this.inv);
     },
-    clearInv () {
-      clearInterval(this.invOver)
+    clearInv() {
+      clearInterval(this.invOver);
     }
   },
-  mounted () {
-    this.runInv()
+  mounted() {
+    this.runInv();
   }
-}
+};
 </script>
 <style scoped>
 .slide-trans-enter-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 .slide-trans-enter {
   transform: translateX(900px);
 }
 .slide-trans-old-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
   transform: translateX(-900px);
 }
 .slide-show {
@@ -101,7 +101,7 @@ export default {
   height: 100%;
   color: #fff;
   background: #000;
-  opacity: .5;
+  opacity: 0.5;
   bottom: 0;
   height: 30px;
   text-align: left;

@@ -22,11 +22,19 @@
   <div class="app-foot">
     <p>© 2019 北京有限公司 All rights reserved</p>
   </div>
+  <my-dialog>
+    <p>hello dialog</p>
+  </my-dialog>
 </div>
 </template>
 
 <script>
-export default {}
+import MyDialog from '@/components/dialog'
+export default {
+  components: {
+    MyDialog
+  }
+}
 </script>
 
 <style >
