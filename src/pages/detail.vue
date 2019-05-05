@@ -1,99 +1,168 @@
 <template>
-<div>
-  <div class="index-board-list">
-    <div class="index-board-item"
-        v-for="(item, index) in boardList"
-        :class="[{'line-last' : index % 2 !== 0}, 'index-board-' + item.id]">
-      <div class="index-board-item-inner">
-        <h2>{{item.title}}</h2>
-        <p>{{item.description}}</p>
-        <div class="index-board-button">
-          <a href="" class="button">立即购买</a>
-        </div>
+  <div class="detail-wrap">
+    <div class="detail-left">
+      <div class="product-board">
+        <img :src="producIcon">
+        <ul>
+          <router-link
+            v-for="(item, keys) in products"
+            :to="{path: item.path}"
+            tag="li"
+            active-class="active"
+            :key="keys"
+          >{{item.name}}</router-link>
+        </ul>
       </div>
     </div>
+    <div class="detail-right">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-boardList: [
+      products: [
         {
-          title: '开放产品',
-          description: '开放产品是一款开放产品',
-          id: 'car',
-          toKey: 'analysis',
-          saleout: false
+          name: "数据统计",
+          path: "count",
+          icon: require("@/assets/images/1.png"),
+          active: false
         },
         {
-          title: '品牌营销',
-          description: '品牌营销帮助你的产品更好地找到定位',
-          id: 'earth',
-          toKey: 'count',
-          saleout: false
+          name: "数据预测",
+          path: "forecast",
+          active: false
         },
         {
-          title: '使命必达',
-          description: '使命必达快速迭代永远保持最前端的速度',
-          id: 'loud',
-          toKey: 'forecast',
-          saleout: true
+          name: "流量分析",
+          path: "analysis",
+          active: false
         },
         {
-          title: '勇攀高峰',
-          description: '帮你勇闯高峰，到达事业的顶峰',
-          id: 'hill',
-          toKey: 'publish',
-          saleout: false
+          name: "广告发布",
+          path: "publish",
+          active: false
         }
-      ]
+      ],
+      imgMap: {
+        "/detail/count": require("@/assets/images/1.png"),
+        "/detail/forecast": require("@/assets/images/2.png"),
+        "/detail/analysis": require("@/assets/images/3.png"),
+        "/detail/publish": require("@/assets/images/4.png")
+      }
+    }
+  },
+  computed: {
+    producIcon () {
+      console.log(this.$route.path)
+      return this.imgMap[this.$route.path]
     }
   }
-}
+};
 </script>
 
-<style scoped>
-.index-board-list {
+<style>
+.detail-wrap {
+  width: 1200px;
+  margin: 0 auto;
   overflow: hidden;
+  padding-top: 20px;
 }
-.index-board-item {
+.detail-left {
   float: left;
-  width: 400px;
+  width: 200px;
+  text-align: center;
+}
+.detail-right {
+  float: left;
+  width: 980px;
+  margin-left: 20px;
+}
+.product-board {
   background: #fff;
-  box-shadow: 0 0 1px #ddd;
+  padding: 20px 0;
+}
+.product-board ul {
+  margin-top: 20px;
+}
+.product-board li {
+  text-align: left;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.product-board li.active,
+.product-board li:hover {
+  background: #4fc08d;
+  color: #fff;
+}
+.product-board li a {
+  display: block;
+}
+.sales-board {
+  background: #fff;
+}
+.sales-board-form {
+}
+.sales-board-intro h2 {
+  font-size: 20px;
   padding: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
 }
-.index-board-item-inner {
-  min-height: 125px;
-  padding-left: 120px;
+.sales-board-intro p {
+  background: #f7fcff;
+  padding: 10px 20px;
+  color: #999;
+  line-height: 1.8;
 }
-.index-board-car .index-board-item-inner {
-  background: url(../assets/images/1.png) no-repeat;
+.sales-board-form {
+  padding: 30px 20px;
+  font-size: 14px;
 }
-.index-board-loud .index-board-item-inner {
-  background: url(../assets/images/2.png) no-repeat;
+.sales-board-line {
+  clear: both;
+  padding-bottom: 20px;
 }
-.index-board-earth .index-board-item-inner {
-  background: url(../assets/images/3.png) no-repeat;
+.sales-board-line-left {
+  display: inline-block;
+  width: 100px;
 }
-.index-board-hill .index-board-item-inner {
-  background: url(../assets/images/4.png) no-repeat;
+.sales-board-line-right {
+  display: inline-block;
+  width: 75%;
 }
-.index-board-item h2 {
+.sales-board-des {
+  border-top: 20px solid #f0f2f5;
+  padding: 15px 20px;
+}
+.sales-board-des p {
+  line-height: 1.6;
+}
+.sales-board-des h2 {
+  font-size: 20px;
+  padding-bottom: 15px;
+}
+.sales-board-des h3 {
   font-size: 18px;
   font-weight: bold;
-  color: #000;
-  margin-bottom: 15px;
+  padding: 20px 0 10px 0;
 }
-.line-last {
-  margin-right: 0;
+.sales-board-des li {
+  padding: 5px 0;
 }
-.index-board-button {
+.sales-board-table {
+  width: 100%;
   margin-top: 20px;
+}
+.sales-board-table th {
+  background: #4fc08d;
+  color: #fff;
+}
+.sales-board-table td {
+  border: 1px solid #f0f2f5;
+  padding: 15px;
 }
 </style>

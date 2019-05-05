@@ -1,13 +1,14 @@
 <template>
-<div>
-  22222222222222222222222
-</div>
+  <div>
+    regform
+  </div>
 </template>
-
 <script>
 export default {
+  
 }
 </script>
-
 <style scoped>
+
 </style>
+

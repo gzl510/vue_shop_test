@@ -1,13 +1,13 @@
 <template>
-<div>
-  CCCCCCCCCCCCCCCCCCCCCCC
-</div>
+  <div>
+    count
+  </div>
 </template>
-
 <script>
 export default {
+  
 }
 </script>
-
 <style scoped>
+
 </style>

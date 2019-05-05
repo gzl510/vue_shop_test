@@ -163,7 +163,7 @@ export default {
   },
   methods: {
     doSomeingChange (index) {
-      console.log(index)
+      // console.log(index)
     }
   }
 };

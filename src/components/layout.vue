@@ -1,40 +1,82 @@
 <template>
-<div>
-  <div class="app-head">
-    <div class="app-head-inner">
-      <img src="../assets/logo.png" alt="">
-      <div class="head-nav">
-        <ul class="nav-list">
-          <li>登录</li>
-          <li class="nav-pile">|</li>
-          <li>注册</li>
-          <li class="nav-pile">|</li>
-          <li>关于</li>
-        </ul>
+  <div>
+    <div class="app-head">
+      <div class="app-head-inner">
+        <img src="../assets/logo.png" alt>
+        <div class="head-nav">
+          <ul class="nav-list">
+            <li>{{username}}</li>
+            <li class="nav-pile" v-if="this.username !== ''">|</li>
+            <li @click="quick" v-if="this.username !== ''">退出</li>
+            <li @click="ShowLogDialog" v-if="this.username == ''">登录</li>
+            <li class="nav-pile" v-if="this.username == ''">|</li>
+            <li @click="ShowRegDialog" v-if="this.username == ''">注册</li>
+            <li class="nav-pile" v-if="this.username !== ''">|</li>
+            <li @click="ShowAboutDialog" v-if="this.username !== ''">关于</li>
+          </ul>
+        </div>
       </div>
     </div>
+    <div class="app-content">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
+    <div class="app-foot">
+      <p>© 2019 北京有限公司 All rights reserved</p>
+    </div>
+    <my-dialog :is-show="isShowLogDialog" @close="close('isShowLogDialog')">
+      <log-form @has-log="onSuccess"></log-form>
+    </my-dialog>
+    <my-dialog :is-show="isShowRegDialog" @close="close('isShowRegDialog')">
+      <reg-form></reg-form>
+    </my-dialog>
+    <my-dialog :is-show="isShowAboutDialog" @close="close('isShowAboutDialog')">
+      <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。</p>
+    </my-dialog>
   </div>
-  <div class="app-content">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
-  </div>
-  <div class="app-foot">
-    <p>© 2019 北京有限公司 All rights reserved</p>
-  </div>
-  <my-dialog>
-    <p>hello dialog</p>
-  </my-dialog>
-</div>
 </template>
 
 <script>
-import MyDialog from '@/components/dialog'
+import MyDialog from "@/components/dialog";
+import LogForm from "@/components/logForm";
+import RegForm from "@/components/regForm";
 export default {
   components: {
-    MyDialog
+    MyDialog,
+    LogForm,
+    RegForm
+  },
+  data() {
+    return {
+      isShowLogDialog: false,
+      isShowRegDialog: false,
+      isShowAboutDialog: false,
+      username: ""
+    };
+  },
+  methods: {
+    ShowLogDialog() {
+      this.isShowLogDialog = true;
+    },
+    ShowRegDialog() {
+      this.isShowRegDialog = true;
+    },
+    ShowAboutDialog() {
+      this.isShowAboutDialog = true;
+    },
+    close(attr) {
+      this[attr] = false;
+    },
+    onSuccess(data) {
+      this.close("isShowLogDialog");
+      this.username = data.username;
+    },
+    quick () {
+      this.username = ''
+    }
   }
-}
+};
 </script>
 
 <style >
@@ -43,19 +85,87 @@ export default {
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -64,22 +174,35 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 body {
   line-height: 1;
 }
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
   content: none;
 }
 table {
@@ -92,7 +215,9 @@ a {
 }
 body {
   background: #f0f2f5;
-  font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB",
+    "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", sans-serif;
   font-size: 14px;
   color: #444;
 }
@@ -156,7 +281,6 @@ body {
   background: #4fc08d;
 }
 .g-form {
-
 }
 .g-form-line {
   padding: 15px 0;
@@ -177,7 +301,7 @@ body {
   padding: 0 10px;
   border: 1px solid #ccc;
 }
-.g-form-btn {
+. btn {
   padding-left: 100px;
 }
 .g-form-error {

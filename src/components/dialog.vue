@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="dialog-wra">
-      <div class="dialog-cover"></div>
+    <div class="dialog-wrap" v-if="isShow">
+      <div class="dialog-cover" @click="closeMySelf"></div>
       <div class="dialog-content">
-        <p class="dialog-close">x</p>
+        <p class="dialog-close" @click="closeMySelf">x</p>
         <slot>empty</slot>
       </div>
     </div>
@@ -12,6 +12,17 @@
 
 <script>
   export default {
+    props: {
+      isShow: {
+        type: Boolean,
+        default: false
+      }
+    },
+    methods: {
+      closeMySelf()  {
+        this.$emit('close')
+      }
+    }
   }
 </script>
 
