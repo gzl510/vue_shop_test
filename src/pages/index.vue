@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv=inv @onChange="doSomeingChange"></slide-show>
+      <slide-show :slides="slides" :inv="inv" @onChange="doSomeingChange"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item"
             v-for="(item, index) in boardList"
@@ -65,7 +65,7 @@ export default {
         {
           src: require('../assets/slideShow/pic3.jpg'),
           title: 'xxx3',
-          href: 'http://xxx.xxx.com'
+          href: 'detail/publish'
         },
         {
           src: require('../assets/slideShow/pic4.jpg'),

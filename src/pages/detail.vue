@@ -6,7 +6,7 @@
         <ul>
           <router-link
             v-for="(item, keys) in products"
-            :to="{path: item.path}"
+            :to="item.path"
             tag="li"
             active-class="active"
             :key="keys"
@@ -59,11 +59,10 @@ export default {
   },
   computed: {
     producIcon () {
-      console.log(this.$route.path)
       return this.imgMap[this.$route.path]
     }
   }
-};
+}
 </script>
 
 <style>
