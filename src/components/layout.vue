@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import MyDialog from "@/components/dialog";
+import MyDialog from "@/components/base/dialog";
 import LogForm from "@/components/logForm";
 import RegForm from "@/components/regForm";
 export default {

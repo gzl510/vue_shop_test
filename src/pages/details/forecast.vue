@@ -8,16 +8,20 @@
       <div class="sales-board-line">
         <div class="sales-board-line-left">购买数量：</div>
         <div class="sales-board-line-right">
+          <v-counter></v-counter>
         </div>
       </div>
       <div class="sales-board-line">
         <div class="sales-board-line-left">媒介：</div>
         <div class="sales-board-line-right">
+          <v-multi-chooser :selections="versionList"></v-multi-chooser>
         </div>
       </div>
       <div class="sales-board-line">
         <div class="sales-board-line-left">有效时间：</div>
-        <div class="sales-board-line-right">一年</div>
+        <div class="sales-board-line-right">
+          <v-chooser :selections="periodList"></v-chooser>
+        </div>
       </div>
       <div class="sales-board-line">
         <div class="sales-board-line-left">总价：</div>
@@ -43,7 +47,52 @@
   </div>
 </template>
 <script>
-export default {};
+import VCounter from "@/components/base/counter"
+import VMultiChooser from "@/components/base/multiChooser"
+import VChooser from "@/components/base/chooser"
+export default {
+  components: {
+    VCounter,
+    VMultiChooser,
+    VChooser
+  },
+  data() {
+    return {
+      versionList: [
+        {
+          label: "纸质报告",
+          value: 0
+        },
+        {
+          label: "pdf",
+          value: 1
+        },
+        {
+          label: "页面报告",
+          value: 2
+        },
+        {
+          label: "邮件",
+          value: 3
+        }
+      ],
+      periodList: [
+        {
+          label: "半年",
+          value: 0
+        },
+        {
+          label: "一年",
+          value: 1
+        },
+        {
+          label: "三年",
+          value: 2
+        }
+      ]
+    }
+  }
+}
 </script>
 <style scoped>
 </style>
