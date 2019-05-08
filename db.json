@@ -31,6 +31,9 @@
   "createOrder": {
     "orderId": "6djk979"
   },
+  "checkOrder": {
+    "order": "数据统计"
+  },
   "getOrderList": {
     "list": [
       {
@@ -41,6 +44,15 @@
         "buyNum": 2,
         "date": "2016-10-10",
         "amount": "500元"
+      },
+      {
+        "orderId": "ddj124",
+        "product": "数据统计",
+        "version": "高级版",
+        "period": "3年",
+        "buyNum": 2,
+        "date": "2016-10-10",
+        "amount": "5000元"
       },
       {
         "orderId": "yuj583",

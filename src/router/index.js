@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 import IndexPage from '@/pages/index'
 import DetailPage from '@/pages/detail'
+import OrderList from '@/pages/orderList'
 import Forecast from '@/pages/details/forecast'
 import Analysis from '@/pages/details/analysis'
 import Count from '@/pages/details/count'
@@ -16,6 +17,10 @@ export default new Router({
     {
       path: '/',
       component: IndexPage
+    },
+    {
+      path: '/orderList',
+      component: OrderList
     },
     {
       path: '/detail',

@@ -25,7 +25,7 @@ export default {
   data () {
     return {
       isDrop: false,
-      nowIndex: 0
+      nowIndex: 0,
     }
   },
   methods: {
