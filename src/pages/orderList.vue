@@ -22,7 +22,7 @@
     <div class="order-list-table">
       <table>
         <tr>
-          <th v-for="head in tableHeads" @click="changeOrderType(head)" :class="{active:head.active}">{{head.label}}</th>
+          <th v-for="head in tableHeads" @click="changeOrderType(head)" :class="{active:head.active}">{{ head.label }}</th>
         </tr>
         <tr v-for="item in tableList">
           <td v-for="head in tableHeads">{{item[head.key]}}</td>
@@ -129,21 +129,19 @@ export default {
 
       })
     },
-    changeOrderType (headitem) {
+    changeOrderType (headItem) {
       this.tableHeads.map((item) => {
         item.active = false
         return item
       })
-      console.log(headitem.active)
-      headitem.active = true
-      conbsole
-      // if (this.currentOrder === 'asc') {
-      //   this.currentOrder = 'desc'
-      // }
-      // else if (this.currentOrder === 'desc') {
-      //   this.currentOrder = 'asc'
-      // }
-      // this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder)
+      headItem.active = true
+      if (this.currentOrder === 'asc') {
+        this.currentOrder = 'desc'
+      }
+      else if (this.currentOrder === 'desc') {
+        this.currentOrder = 'asc'
+      }
+      this.tableList = _.orderBy(this.tableList, headItem.key, this.currentOrder)
     }
   },
   mounted () {
